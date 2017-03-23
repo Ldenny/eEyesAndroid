@@ -3,6 +3,11 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+        <ImageView
+            android:background="@drawable/documents"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
         <TextView
             android:textSize="36sp"
             android:text="Hello"

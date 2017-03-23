@@ -172,9 +172,9 @@ public class CSVFileListActivity extends AppCompatActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.alert_title)
                     //設定圖示
-                    //.setIcon(R.drawable.alert)
+                    .setIcon(R.drawable.warning)
                     //設定訊息內容
-                    .setMessage(R.string.delete_alert)
+                    .setMessage(getString(R.string.delete_alert)+selectedFile.getName().toString()+"?")
                     //設定確認鍵 (positive用於確認)
                     .setPositiveButton(R.string.text_btYes, this)
                     //設定取消鍵 (negative用於取消)

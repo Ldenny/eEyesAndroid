@@ -14,23 +14,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sensorID"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/number"
+        android:layout_marginLeft="70dp"
         android:textColor="@android:color/black" />
     <TextView
+        android:text="20.4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tempValue"
-        android:layout_marginLeft="25dp"
-        android:layout_toRightOf="@+id/sensorID"
+        android:layout_marginLeft="150dp"
         android:textColor="@android:color/black" />
     <TextView
+        android:text="67"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/humidValue"
-        android:layout_centerHorizontal="true"
-        android:layout_toLeftOf="@+id/dateTime"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="210dp"
         android:textColor="@android:color/black" />
     <TextView
         android:layout_width="wrap_content"

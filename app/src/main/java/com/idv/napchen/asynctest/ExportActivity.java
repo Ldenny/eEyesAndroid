@@ -16,10 +16,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by napchen on 2017/3/15.
@@ -28,11 +34,25 @@ import java.io.IOException;
 public class ExportActivity extends AppCompatActivity {
 
     private TextView tvTest;
-    private Button btnSave,toFileList;
+    private Button btnSave,toFileList,getData;
     private EditText etFileName;
     private final static String TAG = "ExportActivity";
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1;
     private SharedPreferences sharedPref;
+    private static String dbIP;
+    private List<Double> tempValue;
+    private List<Double> humidValue;
+    private List<String> dateTime;
+
+
+    private HttpGetSensorValue httpGetSensorValue;
+
+    private List<DisplaySensorValues> displaySensorValuesList;
+
+    private boolean isFirstGot, isSecondGot;
+
+    private String toCSV;
+    int totalCount;
 
 
     @Override
@@ -42,22 +62,24 @@ public class ExportActivity extends AppCompatActivity {
 
 
 
-
         findViews();
     }
 
     private void findViews(){
-        etFileName = (EditText)findViewById(R.id.etFileName);
 
-        // TEST
+        // Convert UI
+        getData = (Button)findViewById(R.id.getData);
+        etFileName = (EditText)findViewById(R.id.etFileName);
+        toFileList = (Button)findViewById(R.id.gotoFileList);
         tvTest = (TextView)findViewById(R.id.prefTest);
 
+        // Get settings from settings xml
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String dbIp = sharedPref.getString("mainIPAddress", null);
 
         tvTest.setText(dbIp);
 
-        toFileList = (Button)findViewById(R.id.gotoFileList);
+
         toFileList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,13 +88,21 @@ public class ExportActivity extends AppCompatActivity {
             }
         });
 
+        // Save button pressed
         btnSave = (Button)findViewById(R.id.btnSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fileName = etFileName.getText().toString();
-                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-                saveFile(dir, fileName + ".csv");
+                getDataToCSV();
+            }
+        });
+
+        getData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
             }
         });
     }
@@ -93,12 +123,14 @@ public class ExportActivity extends AppCompatActivity {
         // Init BufferedWritter and FileOutputStream
         BufferedWriter bw = null;
         FileOutputStream fop = null;
-        String content = "No,ID,Temperature,Humidity,Time\n" +
-                "1,6511,23.4,78.9,18:29:05\n" +
-                "2,6511,23.4,78.9,18:29:08\n" +
-                "3,6511,23.4,78.9,18:29:11\n" +
-                "4,6511,23.4,78.9,18:29:14\n" +
-                "5,6511,23.4,78.9,18:29:17";
+
+        for(int i = 0;i < tempValue.size();i++){
+            if(toCSV == null){
+                toCSV = i + "," + tempValue.get(i).toString().toString() + "," + humidValue.get(i).toString() + "," + dateTime.get(i) + "\n";
+            }else {
+                toCSV = toCSV + i + "," + tempValue.get(i).toString() + "," + humidValue.get(i).toString() + "," + dateTime.get(i) + "\n";
+            }
+        }
         try {
             // 若此資料夾不存在
             if (!dir.exists()) {
@@ -111,7 +143,7 @@ public class ExportActivity extends AppCompatActivity {
 
             File file = new File(dir, fileName);
             fop = new FileOutputStream(file);
-            byte[] contentInBytes = content.getBytes();
+            byte[] contentInBytes = toCSV.getBytes();
 
             fop.write(contentInBytes);
             fop.flush();
@@ -140,4 +172,131 @@ public class ExportActivity extends AppCompatActivity {
         // MEDIA_MOUNTED代表可對外部媒體進行存取
         return result.equals(Environment.MEDIA_MOUNTED);
     }
+    private void getDataToCSV(){
+
+        // Init three values array and String to CSV
+        tempValue = new ArrayList<>();
+        humidValue = new ArrayList<>();
+        dateTime = new ArrayList<>();
+        toCSV = null;
+
+        // Setup IP from settings file
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        dbIP = sharedPref.getString("mainIPAddress", null);
+
+        displaySensorValuesList = new ArrayList<>();
+
+        isFirstGot = false;
+        isSecondGot = false;
+
+        for(int j = 0; j < 2; j++) {
+            httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
+                @Override
+                public void onTaskCompleted() {
+                    String sensorValuesString = httpGetSensorValue.getResultStringData();
+
+                    try {
+                        DisplaySensorValues displaySensorValues = getJSONData(sensorValuesString);
+                        displaySensorValuesList.add(displaySensorValues);
+
+                        int k;
+                        if (isFirstGot == false) {
+                            k = 0;
+                        } else {
+                            k = 1;
+                        }
+                        DisplaySensorValues dsv = displaySensorValuesList.get(k);
+
+                        List<Double> values = new ArrayList<>();
+                        List<String> dates = new ArrayList<>();
+                        if(k == 0){
+                            tempValue = dsv.getValue();
+                        }else if (k == 1){
+                            humidValue = dsv.getValue();
+                            dateTime = dsv.getDate();
+                        }
+                        values = dsv.getValue();
+                        dates = dsv.getDate();
+
+                        Log.e("count", Integer.toString(values.size()));
+
+                        for (int i = 0; i < values.size() / 30; i++) {
+                            Log.e("value", values.get(i).toString());
+                            Log.e("date", dates.get(i));
+                        }
+
+                        if (isFirstGot == false) {
+                            isFirstGot = true;
+                            Log.e("first", "got");
+                        } else {
+                            isSecondGot = true;
+                            Log.e("second", "got");
+                        }
+
+                    } catch (JSONException je) {
+                        je.printStackTrace();
+                    }
+
+                }
+            });
+
+            if (j == 0) {
+                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate=2017-03-12%2018:00:00&enddate=2017-03-12%2018:03:00&type=getRange");
+                Log.e("first", "send...");
+                try {
+                    //set time in mili
+                    Thread.sleep(100);
+                    Log.e("first", "delay...");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate=2017-03-12%2018:00:00&enddate=2017-03-12%2018:03:00&type=getRange");
+                Log.e("second", "send...");
+                try {
+                    //set time in mili
+                    Thread.sleep(100);
+                    Log.e("first", "delay...");
+                    String fileName = etFileName.getText().toString();
+                    File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                    saveFile(dir, fileName + ".csv");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+    private DisplaySensorValues getJSONData(String str) throws JSONException {
+
+        JSONObject jObj = new JSONObject(str);
+        String result = jObj.getString("result");
+        Log.e("JSON result",result);
+        JSONArray jArray = jObj.getJSONArray("values");
+
+        totalCount = jArray.length();
+
+        List<Double> values = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
+
+        Log.e("JSON length",Integer.toString(jArray.length()));
+
+        for (int i = 0; i < jArray.length(); i++) {
+            JSONObject jSensor = jArray.getJSONObject(i);
+
+            Double value = jSensor.getDouble("value");
+            String date = jSensor.getString("date");
+
+            values.add(value);
+            dates.add(date);
+
+        }
+
+        Log.e("Date","save to dsv OK!");
+
+        DisplaySensorValues displaySensorValues = new DisplaySensorValues(values, dates);
+        return displaySensorValues;
+    }
+
 }

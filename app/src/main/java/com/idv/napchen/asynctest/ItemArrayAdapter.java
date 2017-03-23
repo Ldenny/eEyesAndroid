@@ -69,8 +69,8 @@ public class ItemArrayAdapter extends ArrayAdapter<String[]> {
             viewHolder.dateTime.setText(stat[4]);
         } else if (stat.length == 4){
             viewHolder.number.setText(stat[0]);
-            viewHolder.sensorID.setText(stat[1]);
-            viewHolder.tempValue.setText(stat[2]);
+            viewHolder.tempValue.setText(stat[1]);
+            viewHolder.humidValue.setText(stat[2]);
             viewHolder.dateTime.setText(stat[3]);
 
         }

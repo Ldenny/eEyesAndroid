@@ -67,4 +67,12 @@
         android:layout_marginTop="45dp"
         android:layout_below="@+id/btnSave"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/getData"
+        android:text="@string/getData"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/gotoFileList"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
