@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/basic_settings"/>
+    <EditTextPreference
+        android:key="mainIPAddress"
+        android:summary="@string/db_main_placeholder"
+        android:title="@string/db_main_address"/>
+    <EditTextPreference
+        android:key="dbAccount"
+        android:summary="@string/db_user_account_placeholder"
+        android:title="@string/db_user_account"/>
+    <EditTextPreference
+        android:key="dbPW"
+        android:summary="@string/db_password_placeholder"
+        android:title="@string/db_password"
+        android:inputType="textPassword"/>
+    <EditTextPreference
+        android:key="dbName"
+        android:summary="@string/db_serverName_placeholder"
+        android:title="@string/db_serverName"/>
+    <EditTextPreference
+        android:key="dbUserName"
+        android:summary="@string/db_userName_placeholder"
+        android:title="@string/db_userName"/>
+    <EditTextPreference
+        android:key="dbUserPw"
+        android:summary="@string/db_user_password_placeholder"
+        android:title="@string/db_user_password"
+        android:inputType="textPassword"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="sendByAPNS"
+        android:summary="@string/sendByAPNS_ph"
+        android:title="@string/sendByAPNS"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="sendByEmail"
+        android:summary="@string/sendByEmail_ph"
+        android:title="@string/sendByEmail"/>
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="sendBySMS"
+        android:summary="@string/sendBySMS_ph"
+        android:title="@string/sendBySMS"/>
+
+
+</PreferenceScreen>

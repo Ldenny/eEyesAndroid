@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2b4fdf90477708e5b683da417246adb00152f46a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_1a73aee1da84c6bfd723583cfd20258c2597124e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.1_442ebcae542966e7597ac22dd3ca29d881251e9b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="819c2c3a4fb135e085445d11131d069cf9c32b2a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.2.1_6ff2181341f23c27a80a4471e5377013559954ea/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.github.PhilJay/MPAndroidChart-Realm/v2.0.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4591ef46473196a30637ed034018002a462e40ba">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.PhilJay-MPAndroidChart-Realm-v2.0.2_4d85e40c757f61ded33751b3c788c5e37fd3b963/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d41b5d21cc9dd7d210f0ae82ac509ba7f091d611">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-iid-9.2.1_533c13170e96108443fde83210dc71ee58bf050b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.1_a3a40429aa7c93f22899390b25b949694312342b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ac78f93fc89c497a65f9d9a352cd405996d2f65a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-messaging-9.2.1_35c4fb10746bbbd630ae459f444b6674688ad888/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.1_1441bcfeeec7067f94c79c12a8bd9d43952df59c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.1_878d4a80c742c2bda1306986e0d9b4323c72ac46/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6a0f2d219f82db499ac03d5a985c4eb3e83fc422">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-9.2.1_f86b9989bf0b42e0e2560714c180f8cc8e5d2013/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="26649c18afbaca384122baacadc0eddb88381bc5">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_3a711063a434ff13cba6d1d7119cda284e1a6a75/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.1_3e7d7f4d341fbd6f2cb074aacc5dd00391c0c481/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.1_029ab227bab5a9eaa16b6823a3650532ab657052/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.1_cd4e0f74a941b942e03e7c3a21051e5a34bf6414/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6b896c1067633db41e9c10a3a5d0919c5c4cfc8c">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.2.1_8a2534816d1afb22bffa06d64091069f923a35de/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5337354083e89ed67151859ab0b6b80935c60eaf">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-9.2.1_55789f7b76395377702e9828084d041726420abb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.1_c0cffd67ca8cce1699e93fde690c0094a74c19ed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.1_9369fcf494fab067d04d3475c2ac0489c1027927/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.1_e60c5021552007aaf784a670dbd103124e8a1b70/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3627eacd7f7cafb5e8ae683992e7b2f9b7dcab1a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Code/eEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.2.1_925cb9e22e77be587f868729353161ea36e169d6/classes.dex" />
+    </item>
+
+</items>

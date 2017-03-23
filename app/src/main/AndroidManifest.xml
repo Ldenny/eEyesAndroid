@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.idv.napchen.asynctest">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ChartSettingActivity"
+            android:label="Chart Setting">
+        </activity>
+
+        <activity
+            android:name=".RealtimeLineChartActivity"
+            android:label="Realtime Chart">
+        </activity>
+
+        <activity
+            android:name=".HistoryLineChartActivity"
+            android:label="History Chart">
+        </activity>
+
+        <activity
+            android:name=".ExportActivity"
+            android:label="Export List">
+        </activity>
+
+        <activity
+            android:name=".AlarmActivity"
+            android:label="Alarm List">
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Basic Settings"></activity>
+        <activity
+            android:name=".CSVFileListActivity"
+            android:label="CSV List"></activity>
+        <activity
+            android:name=".CSVFileParserActivity"
+            android:label="CSV Parser"></activity>
+        <service android:name=".MyInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
+    </application>
+
+</manifest>

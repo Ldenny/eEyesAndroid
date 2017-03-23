@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item_Home"
+            android:checked="true"
+            android:icon="@drawable/button_charting_150x150"
+            android:title="charting" />
+        <item
+            android:id="@+id/item_News"
+            android:icon="@drawable/button_export_150x150"
+            android:title="export" />
+
+        <item
+            android:id="@+id/item_Map"
+            android:icon="@drawable/button_alarm_150x150"
+            android:title="alarm" />
+
+        <item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/button_setting_150x150"
+            android:title="setting" />
+
+    </group>
+</menu>

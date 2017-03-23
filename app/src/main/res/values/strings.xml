@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">eEyes</string>
+    <string name="basic_settings">基本設定</string>
+    <string name="db_main_address">資料庫IP</string>
+    <string name="db_main_placeholder">請輸入資料庫IP</string>
+    <string name="db_user_account_placeholder">請輸入資料庫帳號</string>
+    <string name="db_user_account">資料庫帳號</string>
+    <string name="db_user_password_placeholder">請輸入密碼</string>
+    <string name="db_user_password">使用者密碼</string>
+    <string name="db_serverName_placeholder">請輸入資料庫名稱</string>
+    <string name="db_serverName">資料庫名稱</string>
+    <string name="db_userName_placeholder">請輸入使用者帳號</string>
+    <string name="db_userName">使用者帳號</string>
+    <string name="db_password_placeholder">請輸入資料庫密碼</string>
+    <string name="db_password">資料庫密碼</string>
+    <string name="sendByAPNS">開啟通知</string>
+    <string name="sendByAPNS_ph">是否開啟通知</string>
+    <string name="sendByEmail">電子郵件通知</string>
+    <string name="sendByEmail_ph">是否開啟電子郵件通知</string>
+    <string name="sendBySMS">簡訊通知</string>
+    <string name="sendBySMS_ph">是否開啟簡訊通知</string>
+    <string name="msg_ExternalStorageNotFound">找不到外部儲存裝置</string>
+    <string name="msg_DirectoryNotCreated">資料夾無法建立</string>
+    <string name="csvFileView">CSV檔案檢視</string>
+    <string name="csvFileName">檔案名稱</string>
+    <string name="delete_alert">確定要刪除檔案？</string>
+    <string name="text_btYes">確定</string>
+    <string name="text_btNo">取消</string>
+    <string name="alert_title">刪除檔案</string>
+    <string name="http_Header">http://</string>
+</resources>
