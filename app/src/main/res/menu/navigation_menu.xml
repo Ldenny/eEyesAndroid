@@ -4,22 +4,22 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/item_Home"
+            android:id="@+id/item_charting"
             android:checked="true"
             android:icon="@drawable/button_charting_150x150"
             android:title="charting" />
         <item
-            android:id="@+id/item_News"
+            android:id="@+id/item_export"
             android:icon="@drawable/button_export_150x150"
             android:title="export" />
 
         <item
-            android:id="@+id/item_Map"
+            android:id="@+id/item_alarm"
             android:icon="@drawable/button_alarm_150x150"
             android:title="alarm" />
 
         <item
-            android:id="@+id/drawer_settings"
+            android:id="@+id/item_settings"
             android:icon="@drawable/button_setting_150x150"
             android:title="setting" />
 

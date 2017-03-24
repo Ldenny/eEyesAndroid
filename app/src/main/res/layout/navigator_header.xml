@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:weightSum="1">
 
     <ImageView
         android:id="@+id/ivUser"
-        android:layout_width="64dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="30dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/eyes"
+        android:layout_weight="0.06" />
 
     <TextView
         android:id="@+id/tvUserName"

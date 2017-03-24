@@ -6,17 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -39,20 +41,15 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
-    // 請求代碼，自行定義
-    private final int CHART_SETTING_REQUEST = 0;
-    private final int EXPORT_REQUEST = 1;
-    private final int ALARM_REQUEST = 2;
-    private final int SETTING_REQUEST = 3;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private static final String JSON_ADDRESS = "/dbinfoGet.php?username=root&password=root&database=eEyes&appUserName=user&appPassword=password&type=getSensorByUser";
-
-    private Button btnSubmit, btnExport, btnAlarm, btnSetting;
 
     private List<Sensor> sensorList;
 
     private ProgressDialog progressDialog;
-    private ListView listView;
     private AllSensorsInfo allSensorsInfo;
 
     private int httpStatusCode;
@@ -63,12 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
     private HttpGetSensorValue httpGetSensorValue;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        // setup FrameLayout and NavigationView
+        setContentView(R.layout.activity_navi_view_main);
+
+        // setup action bar icon
+        setUpActionBar();
+
+        //
+        initDrawer();
+        initBody();
 
         allSensorsInfo = AllSensorsInfo.getInstance();
 
@@ -81,11 +85,116 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Main start token: " + refreshedToken);
         sendRegistrationToServer(refreshedToken);
 
-
         findViews();
     }
 
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // 讓Drawer關閉時，出現三條線 |||
+        actionBarDrawerToggle.syncState();
+    }
+
+    private void setUpActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // 讓Drawer開啟時，在左上角出現一個"←"圖示
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void initDrawer() {
+
+        // setup DrawerLayout
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        // text_Open and text_Close not use
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.text_Open, R.string.text_Close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                // make selected item dark
+                menuItem.setChecked(true);
+                // return drawer
+                drawerLayout.closeDrawers();
+
+                Intent intent;
+                intent = new Intent(MainActivity.this, ChartSettingActivity.class);
+
+                switch (menuItem.getItemId()) {
+                    case R.id.item_charting:
+                        intent = new Intent(MainActivity.this, ChartSettingActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.item_export:
+//                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this, ExportActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.item_alarm:
+//                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this, AlarmActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.item_settings:
+//                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        initBody();
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    private void initBody() {
+        // initial fragment body
+        Fragment fragment = new com.idv.napchen.asynctest.HomeFragment();
+        switchFragment(fragment);
+//        setTitle(R.string.text_Open);
+    }
+
+    private void switchFragment(Fragment fragment) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.body, fragment);   // FrameLayout
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void findViews() {
+
+        httpStatusCode = 0;
+        errorMsg = "";
+
+        // get all sensor info.
+        String httpHeader = getString(R.string.http_Header);
+        dbIP = httpHeader + dbIP + JSON_ADDRESS;
+        new GetAllSensorInfo().execute(dbIP);
+    }
+
     private void sendRegistrationToServer(final String token){
+
         httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
 
             @Override
@@ -95,77 +204,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
-
-
-    }
-
-    private void findViews() {
-
-        btnSubmit = (Button) findViewById(R.id.btnChartSetting);
-        btnExport = (Button) findViewById(R.id.btnExoprt);
-        btnAlarm = (Button) findViewById(R.id.btnAlarm);
-        btnSetting = (Button) findViewById(R.id.btnSetting);
-
-        listView = (ListView) findViewById(R.id.listView);
-
-        httpStatusCode = 0;
-        errorMsg = "";
-
-        // get all sensor info.
-        String httpHeader = getString(R.string.http_Header);
-        dbIP = httpHeader + dbIP + JSON_ADDRESS;
-        new GetAllSensorInfo().execute(dbIP);
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if(sensorList == null) {
-//                    displayWarningMessage();
-//                } else {
-                    Intent intent;
-                    intent = new Intent(MainActivity.this, ChartSettingActivity.class);
-                    startActivity(intent);
-//                }
-            }
-        });
-
-        btnExport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(sensorList == null) {
-                    displayWarningMessage();
-                } else {
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, ExportActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
-        btnAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sensorList == null) {
-                    displayWarningMessage();
-                } else {
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, AlarmActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
-        btnSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-
-                intent.setClass(MainActivity.this, SettingsActivity.class);
-                //將自行定義的請求代碼一起送出，才能確認資料來源與出處是否為同一個
-                startActivityForResult(intent, SETTING_REQUEST);
-            }
-        });
     }
 
     private void displayWarningMessage() {
@@ -195,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         // pre execute before async start...
         @Override
         protected void onPreExecute() {
-Log.e("AsyncTask","onPreExecute...");
+            Log.e("AsyncTask","onPreExecute...");
             progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setMessage("Loading...");
             progressDialog.show();
@@ -205,7 +243,7 @@ Log.e("AsyncTask","onPreExecute...");
         protected List<Sensor> doInBackground(String... params) {
 
             String url = params[0];
-Log.e("AsyncTask",url);
+            Log.e("AsyncTask",url);
             StringBuilder sb = new StringBuilder();
 
             try {
@@ -219,7 +257,7 @@ Log.e("AsyncTask",url);
                 con.connect();
                 Log.e("AsyncTask","HTTP Connect...");
                 httpStatusCode = con.getResponseCode();
-Log.e("HTTP","HTTP Response...");
+                Log.e("HTTP","HTTP Response...");
                 if(httpStatusCode == HttpURLConnection.HTTP_OK) {
                     InputStream is = con.getInputStream();
                     InputStreamReader isr = new InputStreamReader(is);
@@ -268,71 +306,8 @@ Log.e("HTTP","HTTP Response...");
 
             progressDialog.dismiss();
 
-            if(sensorList != null) {
-                listView.setAdapter(new MyAdapter(result));
-            } else {
-//                String errorExport;
-//                if(httpStatusCode == 0) {
-//                    errorExport = "HTTP Error : " + errorMsg;
-//                } else {
-//                    errorExport = "HTTP Error, error code : " + Integer.toString(httpStatusCode);
-//                }
+            if(sensorList == null) {
                 displayWarningMessage();
-            }
-        }
-
-        private class MyAdapter extends BaseAdapter {
-
-            private List<Sensor> sensorList;
-
-            public MyAdapter() {
-            }
-
-            public MyAdapter(List<Sensor> sensorList) {
-                this.sensorList = sensorList;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-
-                ViewHolder holder;
-
-                if(convertView == null) {
-                    holder = new ViewHolder();
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                    convertView = inflater.inflate(R.layout.listview_park, parent, false);
-
-                    holder.sName = (TextView) convertView.findViewById(R.id.tvName);
-                    holder.tvType = (TextView) convertView.findViewById(R.id.tvType);
-                    convertView.setTag(holder);
-                } else {
-                    holder = (ViewHolder) convertView.getTag();
-                }
-
-                Sensor sensor = sensorList.get(position);
-                holder.sName.setText(sensor.getName());
-                holder.tvType.setText(sensor.getType());
-
-                return convertView;
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return sensorList.get(position);
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public int getCount() {
-                return sensorList.size();
-            }
-
-            class ViewHolder {
-                TextView sName, tvType;
             }
         }
 
@@ -364,7 +339,6 @@ Log.e("HTTP","HTTP Response...");
                 String dbRealValueTable = jSensor.getString("dbRealValueTable");
                 String dbAverageValueTable = jSensor.getString("dbAverageValueTable");
 
-//                Sensor(Integer sensorID, String name, Double hiAlarm, Double loAlarm, Double latitude, Double longitude, String type, Double rangeHi, Double rangeLo, String unit, String desc,  boolean isSelected)
                 Sensor sensor = new Sensor(id, name, hiAlarm, loAlarm, latitude, longitude, type, rangeHi, rangeLo, unit, description, dbRealValueTable, dbAverageValueTable, true);
                 list.add(sensor);
                 Log.e("JSON Sensor",sensor.getName());

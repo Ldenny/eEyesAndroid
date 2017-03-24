@@ -2,12 +2,15 @@ apply plugin: 'com.android.application'
 //apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+//    compileSdkVersion 25
+    compileSdkVersion 23
+//    buildToolsVersion "25.0.2"
+    buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.idv.napchen.eEyes"
         minSdkVersion 16
-        targetSdkVersion 25
+//        targetSdkVersion 25
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -31,15 +34,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.1'
+//    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     testCompile 'junit:junit:4.12'
-//    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-//    compile 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
 }
 
 dependencies {
-//    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-//    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     compile 'com.github.PhilJay:MPAndroidChart-Realm:v2.0.2@aar'
 
     compile project(':MPChartLib')

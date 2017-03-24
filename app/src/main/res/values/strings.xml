@@ -29,4 +29,6 @@
     <string name="alert_title">刪除檔案</string>
     <string name="http_Header">http://</string>
     <string name="getData">抓取資料</string>
+    <string name="text_Open">Open</string>
+    <string name="text_Close">Close</string>
 </resources>
