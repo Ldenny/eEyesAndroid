@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="2165340b300e17b1cd0a937da233e533a67ab6c2">
+        sha1="3604ce98c2ccfe0c0c40a73f26e94d6f89178ff0">
         <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a9403bd6874675a8768a5ee0a0a746d7ea183bc4/classes.dex" />
     </item>
     <item
@@ -151,7 +151,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="7b365bd6618de9a0ad25a63e0122d0b79651f036">
+        sha1="de56530be5d8c4ac646c49f5c0880f5e19d27f27">
         <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_048e6bd7f091715466476293df45634495ee074b/classes.dex" />
     </item>
     <item

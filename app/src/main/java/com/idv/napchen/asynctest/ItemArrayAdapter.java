@@ -15,7 +15,6 @@ public class ItemArrayAdapter extends ArrayAdapter<String[]> {
 
     static class ItemViewHolder {
         TextView number;
-        TextView sensorID;
         TextView tempValue;
         TextView humidValue;
         TextView dateTime;
@@ -52,7 +51,6 @@ public class ItemArrayAdapter extends ArrayAdapter<String[]> {
 			row = inflater.inflate(R.layout.csvitem_layout, parent, false);
             viewHolder = new ItemViewHolder();
             viewHolder.number = (TextView) row.findViewById(R.id.number);
-            viewHolder.sensorID = (TextView) row.findViewById(R.id.sensorID);
             viewHolder.tempValue = (TextView) row.findViewById(R.id.tempValue);
             viewHolder.humidValue = (TextView) row.findViewById(R.id.humidValue);
             viewHolder.dateTime = (TextView) row.findViewById(R.id.dateTime);
@@ -61,13 +59,7 @@ public class ItemArrayAdapter extends ArrayAdapter<String[]> {
             viewHolder = (ItemViewHolder)row.getTag();
         }
         String[] stat = getItem(position);
-        if(stat.length == 5) {
-            viewHolder.number.setText(stat[0]);
-            viewHolder.sensorID.setText(stat[1]);
-            viewHolder.tempValue.setText(stat[2]);
-            viewHolder.humidValue.setText(stat[3]);
-            viewHolder.dateTime.setText(stat[4]);
-        } else if (stat.length == 4){
+        if (stat.length == 4){
             viewHolder.number.setText(stat[0]);
             viewHolder.tempValue.setText(stat[1]);
             viewHolder.humidValue.setText(stat[2]);

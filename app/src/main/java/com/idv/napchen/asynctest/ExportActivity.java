@@ -86,7 +86,6 @@ public class ExportActivity extends AppCompatActivity {
     private void findViews(){
 
         // Convert UI
-        getData = (Button)findViewById(R.id.getData);
         etFileName = (EditText)findViewById(R.id.etFileName);
         toFileList = (Button)findViewById(R.id.gotoFileList);
         etStartDate = (EditText) findViewById(R.id.etStartDate);
@@ -120,14 +119,6 @@ public class ExportActivity extends AppCompatActivity {
             }
         });
 
-        getData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
         etStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,10 +165,11 @@ public class ExportActivity extends AppCompatActivity {
         FileOutputStream fop = null;
 
         for(int i = 0;i < tempValue.size();i++){
+            int j = i+1;
             if(toCSV == null){
-                toCSV = i + "," + tempValue.get(i).toString().toString() + "," + humidValue.get(i).toString() + "," + dateTime.get(i) + "\n";
+                toCSV = "No,Temp,Humid,Time\n" + j + "," + tempValue.get(i).toString().toString() + "," + humidValue.get(i).toString() + "," + dateTime.get(i) + "\n";
             }else {
-                toCSV = toCSV + i + "," + tempValue.get(i).toString() + "," + humidValue.get(i).toString() + "," + dateTime.get(i) + "\n";
+                toCSV = toCSV + j + "," + tempValue.get(i).toString() + "," + humidValue.get(i).toString() + "," + dateTime.get(i) + "\n";
             }
         }
         try {
