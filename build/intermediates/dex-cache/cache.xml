@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="2cba7b691964c07aba1aa372de0556f230c17502">
+        sha1="6e68a470b8fab11072fbcb1bca2a662fba7c8bac">
         <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_914e928e9b5fd4d89adc4ae92da281d212c95ca6/classes.dex" />
     </item>
     <item
@@ -133,7 +133,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="4ef8a2ccb37e5acfe1a149185350c0019b6a0596">
+        sha1="ba992fb67f44145be75683a70b8c090746ff96ac">
         <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_f0ffda2e4eb6d1baabafd6bc6ab0ec3a34c8c4ca/classes.dex" />
     </item>
     <item

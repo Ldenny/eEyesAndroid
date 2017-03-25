@@ -292,7 +292,7 @@ public class ChartSettingActivity extends AppCompatActivity {
             // hour、minute會成為時間挑選器預選的時與分
             // false 設定是否為24小時制顯示
             TimePickerDialog timePickerDialog = new TimePickerDialog(
-                    getActivity(), this, hour, minute, false);
+                    getActivity(), this, hour, minute, true);
             return timePickerDialog;
         }
 

@@ -7,12 +7,28 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart1"
         android:layout_width="match_parent"
-        android:layout_height="280dp"/>
+        android:layout_height="260dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTemp"
+        android:background="@color/colorAccent"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart2"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="260dp"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvHumi"
+        android:background="@android:color/holo_blue_bright"
+        android:textSize="18sp"
+        android:textAlignment="center" />
 
 </LinearLayout>

@@ -49,15 +49,15 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
 
     private boolean isFirstGot, isSecondGot, isHttpResponse;
 
-    private String url10 = "http://";
-    private String url11 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate=";
+    private final String url10 = "http://";
+    private final String url11 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate=";
     private String url12 = "2017-03-16%2013:00:00";
-    private String url13 = "&enddate=";
+    private final String url13 = "&enddate=";
     private String url14 = "2017-03-16%2013:03:00";
-    private String url15 = "&type=getRange";
+    private final String url15 = "&type=getRange";
     private String url1;
 
-    private String url21 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate=";
+    private final String url21 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate=";
     private String url2;
 
     int totalCount;
@@ -153,7 +153,7 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
 
         if(displaySensorValuesList.size() < 2) {
 
-            displayWarningMessage("no data");
+            displayWarningMessage("no data or data error");
             return;
         }
 
@@ -485,7 +485,7 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
             Log.e("HisChart","setData");
 
             // create a dataset and give it a type
-            set1 = new LineDataSet(yVals1, "DataSet 1");
+            set1 = new LineDataSet(yVals1, "房間溫度");
 
             set1.setAxisDependency(AxisDependency.LEFT);
             set1.setColor(Color.RED);
@@ -502,7 +502,7 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
             //set1.setCircleHoleColor(Color.WHITE);
 
             // create a dataset and give it a type
-            set2 = new LineDataSet(yVals2, "DataSet 2");
+            set2 = new LineDataSet(yVals2, "房間濕度");
             set2.setAxisDependency(AxisDependency.RIGHT);
             set2.setColor(Color.BLUE);
             set2.setCircleColor(Color.BLUE);

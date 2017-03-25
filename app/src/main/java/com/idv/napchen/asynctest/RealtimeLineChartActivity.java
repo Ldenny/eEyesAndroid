@@ -1,15 +1,19 @@
 
 package com.idv.napchen.asynctest;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -40,6 +44,8 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
 
     private HttpGetSensorValue httpGetSensorValue;
 
+    private TextView tvTemp, tvHumi;
+
     private List<DisplaySensorValues> displaySensorValuesList;
 
     List<Double> values1;
@@ -57,10 +63,12 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
     private String url23 = "&enddate=2017-02-28%2015:30:00&type=getNew";
     private String url2 = url21 + url22 + url23;
 
-    private int onChartCount, onChartCount2, totalCount;
+    private int onChartCount, onChartCount2, totalCount, timeoutCount;
 
     private SharedPreferences sharedPref;
     private static String dbIP;
+
+    boolean isHttpResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +77,12 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_realtime_chart);
 
+        tvTemp = (TextView) findViewById(R.id.tvTemp);
+        tvHumi = (TextView) findViewById(R.id.tvHumi);
+
         // Setup IP from settings file
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         dbIP = sharedPref.getString("mainIPAddress", null);
-
 
         String httpHeader = getString(R.string.http_Header);
         url11 = httpHeader + dbIP + url11;
@@ -83,9 +93,12 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
 
         onChartCount = 0;
         totalCount = 0;
+        timeoutCount = 0;
 
         isFirst = false;
         isSecond = false;
+
+        isHttpResponse = false;
 
         int year, month, day, hour, minute, second;
 
@@ -218,14 +231,35 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
         {
 //            ++m_nTime; // 經過的秒數 + 1
             handler.postDelayed(this, 1000);
-            // 若要取消可以寫一個判斷在這決定是否啟動下一次即可
+
             Log.e("timer event","1 sec entry");
+
+            if(isFirst == true || isSecond == true) {
+                Log.e("timer event","still wait data leave...");
+                return;
+            }
+
+            boolean isTimeOut = false;
 
             for(int j = 0; j < 2; j++) {
                 httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
                     @Override
                     public void onTaskCompleted() {
                         String sensorValuesString = httpGetSensorValue.getResultStringData();
+
+                        Log.e("HTTP response",sensorValuesString);
+
+                        if(sensorValuesString.substring(0,4).equals("HTTP")) {
+                            displayWarningMessage(sensorValuesString);
+                            return;
+                        }
+
+                        if(sensorValuesString.length() == 0) {
+                            displayWarningMessage("Http no response!");
+                            return;
+                        }
+
+                        isHttpResponse = true;
 
                         try {
                             getJSONData(sensorValuesString);
@@ -241,38 +275,69 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                     }
                 });
 
+                int counter = 0;
+
                 if(j == 0) {
                     url1 = url11 + url12 + url13;
                     Log.e("first",url1);
                     httpGetSensorValue.execute(url1);
                     isFirst = true;
 
-                    try {
-                        //set time in mili
-                        Thread.sleep(500);
-                        Log.e("first","delay...");
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    while (isFirst == true) {
+                        try {
+                            //set time in mili
+                            Thread.sleep(300);
+                            Log.e("first", "delay...");
+                            counter++;
+                            if(counter >= 10) {
+                                isFirst = false;
+                                isTimeOut = true;
+                                Log.e("first", "timeout...");
+                                break;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                } else {
+                } else if(isTimeOut == false) {
                     url2 = url21 + url12 + url23;
                     Log.e("second",url2);
                     httpGetSensorValue.execute(url2);
                     isSecond = true;
 
-                    try {
-                        //set time in mili
-                        Thread.sleep(300);
-                        Log.e("first","delay...");
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    while (isSecond == true) {
+                        try {
+                            //set time in mili
+                            Thread.sleep(300);
+                            Log.e("second", "delay...");
+                            counter++;
+                            if(counter >= 10) {
+                                isSecond = false;
+                                isTimeOut = true;
+                                Log.e("second", "timeout...");
+                                break;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
 
-            if(totalCount > onChartCount) {
-                addEntry();
-                addEntry2();
+            if(isTimeOut == false) {
+                if (totalCount > onChartCount) {
+                    addEntry();
+                    addEntry2();
+                    Log.e("realchart", "added...");
+                }
+                timeoutCount = 0;
+            } else {
+                Log.e("realchart", "timeout...");
+                timeoutCount++;
+                if(timeoutCount >= 5) {
+                    displayWarningMessage("No sensor data received!");
+                    handler.removeCallbacks(timerRun);
+                }
             }
         }
     };
@@ -300,7 +365,6 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
 
                     String date = jSensor.getString("date");
 
-//                url12 = date replace(" ", "%20");
                     url12 = date.replaceAll(" ", "%20");
                     totalCount++;
                 }
@@ -312,6 +376,22 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
         } else {
             Log.e("Second value count", Integer.toString(values2.size()));
         }
+    }
+
+    private void displayWarningMessage(String msg) {
+
+        Toast.makeText(RealtimeLineChartActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+        AlertDialog alertDialog = new AlertDialog.Builder(RealtimeLineChartActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(msg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     @Override
@@ -367,6 +447,8 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                     double value = values1.get(onChartCount);
                     data.addEntry(new Entry(set.getEntryCount(), (float) value), 0);
                     onChartCount++;
+
+                    tvTemp.setText(Double.toString(value));
                 }
             }
 //            data.addEntry(new Entry(set.getEntryCount(), (float) (Math.random() * 40) + 30f), 0);
@@ -405,6 +487,8 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                     double value = values2.get(onChartCount2);
                     data.addEntry(new Entry(set.getEntryCount(), (float) value), 0);
                     onChartCount2++;
+
+                    tvHumi.setText(Double.toString(value));
                 }
             }
 //            data.addEntry(new Entry(set.getEntryCount(), (float) (Math.random() * 40) + 30f), 0);
