@@ -10,18 +10,48 @@
         android:textSize="50sp"
         android:textAlignment="center"
         android:id="@+id/tvsaveCSV" />
-
-
-    <Button
-        android:id="@+id/btnSave"
-        android:text="存檔"
-        android:textSize="28sp"
+    <TextView
+        android:id="@+id/tvFileName"
+        android:text="@string/csvFileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        android:layout_marginTop="118dp"
-        android:layout_below="@+id/tvsaveCSV"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBaseline="@+id/etFileName"
+        android:layout_alignBottom="@+id/etFileName"
+        android:layout_toLeftOf="@+id/etFileName"
+        android:layout_toStartOf="@+id/etFileName"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:text="Start Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvFileName"
+        android:layout_alignLeft="@+id/tvFileName"
+        android:layout_marginTop="30dp"
+        android:id="@+id/tvStartDate" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvStartDate"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etStartDate"
+        android:layout_alignLeft="@+id/etEndDate"
+        android:layout_alignStart="@+id/etEndDate" />
+
+    <TextView
+        android:text="End Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvStartDate"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@+id/tvStartDate"
+        android:id="@+id/tvEndDate" />
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -36,26 +66,6 @@
         android:layout_marginRight="32dp"
         android:layout_marginEnd="32dp" />
 
-    <TextView
-        android:id="@+id/prefTest"
-        android:text="HIHI"
-        android:textSize="30sp"
-        android:layout_below="@+id/btnSave"
-        android:layout_marginLeft="160dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:text="@string/csvFileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/etFileName"
-        android:layout_alignBottom="@+id/etFileName"
-        android:layout_toLeftOf="@+id/etFileName"
-        android:layout_toStartOf="@+id/etFileName"
-        android:layout_marginRight="18dp"
-        android:layout_marginEnd="18dp"
-        android:textStyle="normal|bold"
-        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/gotoFileList"
@@ -75,4 +85,27 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etEndDate"
+        android:layout_alignBaseline="@+id/tvEndDate"
+        android:layout_alignBottom="@+id/tvEndDate"
+        android:layout_alignLeft="@+id/etFileName"
+        android:layout_alignStart="@+id/etFileName" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:text="存檔"
+        android:textSize="28sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/etEndDate"
+        android:layout_alignLeft="@+id/getData"
+        android:layout_alignStart="@+id/getData" />
 </RelativeLayout>

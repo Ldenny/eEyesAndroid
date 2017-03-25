@@ -3,7 +3,6 @@ package com.idv.napchen.asynctest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,9 +21,6 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.List;
-
-import static android.R.attr.end;
-import static android.R.attr.y;
 
 /**
  * Created by napchen on 2017/3/15.
