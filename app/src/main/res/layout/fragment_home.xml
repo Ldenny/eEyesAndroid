@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/andro1080x1920_empty">
-
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

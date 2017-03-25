@@ -12,21 +12,66 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="189ec90601b5da14f6858c9166ba16dd2345e46d">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_914e928e9b5fd4d89adc4ae92da281d212c95ca6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_5a69eca126a7fc75ba37a5fce43b6f5ca2e95f88/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.3.0_14c0e04350375a25175b92bce2aaee3ac8f8c536/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="3627eacd7f7cafb5e8ae683992e7b2f9b7dcab1a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.2.1_f3ab73fe781d0f7790c3a0526c344a76d166e3e6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.github.PhilJay/MPAndroidChart-Realm/v2.0.2/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="4591ef46473196a30637ed034018002a462e40ba">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.PhilJay-MPAndroidChart-Realm-v2.0.2_b8ca0d182062fbd6a6172e2cf3c6d99e9584b33f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="819c2c3a4fb135e085445d11131d069cf9c32b2a">
+        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.2.1_f6edb2d868db2aa90f4b71b8b7820e474e75eaa8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/9.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
         sha1="ac78f93fc89c497a65f9d9a352cd405996d2f65a">
         <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-messaging-9.2.1_f9b8e33bae897a615c23a68d7e226ea862388a84/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="6e68a470b8fab11072fbcb1bca2a662fba7c8bac">
-        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_914e928e9b5fd4d89adc4ae92da281d212c95ca6/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -45,15 +90,6 @@
         revision="23.0.2"
         sha1="6a0f2d219f82db499ac03d5a985c4eb3e83fc422">
         <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-9.2.1_ec94b2231003a7a293d1b72fa0f065b452b651de/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
-        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_5a69eca126a7fc75ba37a5fce43b6f5ca2e95f88/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -93,15 +129,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
-        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.3.0_14c0e04350375a25175b92bce2aaee3ac8f8c536/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -111,29 +138,11 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="3627eacd7f7cafb5e8ae683992e7b2f9b7dcab1a">
-        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.2.1_f3ab73fe781d0f7790c3a0526c344a76d166e3e6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.github.PhilJay/MPAndroidChart-Realm/v2.0.2/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="4591ef46473196a30637ed034018002a462e40ba">
-        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.PhilJay-MPAndroidChart-Realm-v2.0.2_b8ca0d182062fbd6a6172e2cf3c6d99e9584b33f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="ba992fb67f44145be75683a70b8c090746ff96ac">
+        sha1="35146cced911088ebcde6d088852286258a8ee25">
         <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_f0ffda2e4eb6d1baabafd6bc6ab0ec3a34c8c4ca/classes.dex" />
     </item>
     <item
@@ -153,15 +162,6 @@
         revision="23.0.2"
         sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
         <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.3.0_804c76ac18d8e7b1b5fdc19ac921ca041c0e6969/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="819c2c3a4fb135e085445d11131d069cf9c32b2a">
-        <dex dex="/Users/napchen/Documents/AP104-智慧APP整合開發養成班/eEyes/Android/eEyes Source/eEyesAndroid/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.2.1_f6edb2d868db2aa90f4b71b8b7820e474e75eaa8/classes.dex" />
     </item>
 
 </items>

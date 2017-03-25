@@ -10,7 +10,38 @@
     <FrameLayout
         android:id="@+id/body"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/andro1080x1920_empty"/>
+
+    <TextView
+        android:text="房間溫度"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTempName"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="200dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTempValue"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="220dp"/>
+
+    <TextView
+        android:text="房間濕度"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvHumiName"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="100dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvHumiValue"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="420dp"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

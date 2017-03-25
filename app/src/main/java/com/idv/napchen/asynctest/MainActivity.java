@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -45,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
+    private TextView tvTempValue, tvHumiValue;
+
+    private Handler handler;
+
     private static final String JSON_ADDRESS = "/dbinfoGet.php?username=root&password=root&database=eEyes&appUserName=user&appPassword=password&type=getSensorByUser";
 
     private List<Sensor> sensorList;
@@ -60,6 +66,16 @@ public class MainActivity extends AppCompatActivity {
 
     private HttpGetSensorValue httpGetSensorValue;
 
+    private boolean isFirst, isSecond, isHandlerEnable, isAllSensorGot;
+
+    private String url1 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=RealID10001&field=RealValue&sensorID=1&datefield=Date&startdate=2017-03-20%2009:37:01&enddate=2017-02-28%2015:30:00&type=getNewest";
+
+    private String url2 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=RealID10002&field=RealValue&sensorID=2&datefield=Date&startdate=2017-03-20%2009:37:01&enddate=2017-02-28%2015:30:00&type=getNewest";
+
+    private double tempValue, humiValue;
+
+    private int timeoutCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         //
         initDrawer();
-        initBody();
+//        initBody();
 
         allSensorsInfo = AllSensorsInfo.getInstance();
 
@@ -86,6 +102,30 @@ public class MainActivity extends AppCompatActivity {
         sendRegistrationToServer(refreshedToken);
 
         findViews();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Log.e("onStop", "entry...");
+
+        if(isHandlerEnable == true) {
+            Log.e("onStop", "stop...");
+            isHandlerEnable = false;
+            handler.removeCallbacks(timerRun);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("onPause", "entry...");
+        if(isHandlerEnable == true) {
+            Log.e("onPause", "stop...");
+            isHandlerEnable = false;
+            handler.removeCallbacks(timerRun);
+        }
     }
 
     @Override
@@ -168,6 +208,222 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    private void sendRegistrationToServer(final String token){
+
+        httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
+
+            @Override
+            public void onTaskCompleted() {
+                Log.d(TAG,"http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
+                Log.d(TAG,"Updated DeviceToken");
+            }
+        });
+        httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
+    }
+
+    private void findViews() {
+
+        httpStatusCode = 0;
+        errorMsg = "";
+
+        isAllSensorGot = false;
+
+        // get all sensor info.
+        String httpHeader = getString(R.string.http_Header);
+        String url = httpHeader + dbIP + JSON_ADDRESS;
+//        dbIP = httpHeader + dbIP + JSON_ADDRESS;
+        new GetAllSensorInfo().execute(url);
+
+        int counter = 0;
+        while (isAllSensorGot == false) {
+            try {
+                Thread.sleep(300);
+                Log.e("GetAllSensorInfo", "delay...");
+                counter++;
+                if(counter >= 10) {
+                    Log.e("isAllSensorGot", "timeout...");
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        tvTempValue = (TextView) findViewById(R.id.tvTempValue);
+        tvHumiValue = (TextView) findViewById(R.id.tvHumiValue);
+
+        url1 = "http://" + dbIP + url1;
+        url2 = "http://" + dbIP + url2;
+
+        isHandlerEnable = true;
+        startGetSensorValue();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.e("onResume", "entry");
+
+        if(isHandlerEnable == false) {
+            Log.e("onResume", "handler...");
+            isHandlerEnable = true;
+            startGetSensorValue();
+        }
+    }
+
+    private void startGetSensorValue() {
+
+        tempValue = 0;
+        humiValue = 0;
+        timeoutCount = 0;
+
+        isFirst = false;
+        isSecond = false;
+
+        Log.e("GetAllSensorInfo", url1);
+        Log.e("GetAllSensorInfo", url2);
+
+        handler = new Handler();
+        handler.postDelayed(timerRun, 1000);
+    }
+
+    private final Runnable timerRun = new Runnable()
+    {
+        public void run()
+        {
+//            ++m_nTime; // 經過的秒數 + 1
+            handler.postDelayed(this, 1000);
+
+            Log.e("main timer event","1 sec entry");
+
+            if(isFirst == true || isSecond == true) {
+                Log.e("timer event","still wait data leave...");
+                return;
+            }
+
+            boolean isTimeOut = false;
+
+            for(int j = 0; j < 2; j++) {
+                httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted() {
+                        String sensorValuesString = httpGetSensorValue.getResultStringData();
+
+                        Log.e("HTTP response",sensorValuesString);
+
+                        if(sensorValuesString.substring(0,4).equals("HTTP")) {
+                            displayWarningMessage(sensorValuesString);
+                            return;
+                        }
+
+                        if(sensorValuesString.length() == 0) {
+                            displayWarningMessage("Http no response!");
+                            return;
+                        }
+
+                        try {
+                            getJSONData(sensorValuesString);
+                            if(isFirst) {
+                                isFirst = false;
+                            } else {
+                                isSecond = false;
+                            }
+                        } catch (JSONException je) {
+                            je.printStackTrace();
+                        }
+
+                    }
+                });
+
+                int counter = 0;
+
+                if(j == 0) {
+                    Log.e("first",url1);
+                    httpGetSensorValue.execute(url1);
+                    isFirst = true;
+
+                    while (isFirst == true) {
+                        try {
+                            //set time in mili
+                            Thread.sleep(300);
+                            Log.e("first", "delay...");
+                            counter++;
+                            if(counter >= 10) {
+                                isFirst = false;
+                                isTimeOut = true;
+                                Log.e("first", "timeout...");
+                                break;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else if(isTimeOut == false) {
+                    Log.e("second",url2);
+                    httpGetSensorValue.execute(url2);
+                    isSecond = true;
+
+                    while (isSecond == true) {
+                        try {
+                            //set time in mili
+                            Thread.sleep(300);
+                            Log.e("second", "delay...");
+                            counter++;
+                            if(counter >= 10) {
+                                isSecond = false;
+                                isTimeOut = true;
+                                Log.e("second", "timeout...");
+                                break;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            if(isTimeOut == false) {
+
+                tvTempValue.setText(Double.toString(tempValue));
+                tvHumiValue.setText(Double.toString(humiValue));
+                Log.e("sensor value", "updated...");
+
+                timeoutCount = 0;
+            } else {
+                Log.e("realchart", "timeout...");
+                timeoutCount++;
+                if(timeoutCount >= 5) {
+                    displayWarningMessage("No sensor data received!");
+                    handler.removeCallbacks(timerRun);
+                }
+            }
+        }
+    };
+
+    private void getJSONData(String str) throws JSONException {
+
+        JSONObject jObj = new JSONObject(str);
+        String result = jObj.getString("result");
+        Log.e("JSON result",result);
+        JSONArray jArray = jObj.getJSONArray("values");
+
+        Log.e("JSON length",Integer.toString(jArray.length()));
+
+        for (int i = 0; i < jArray.length(); i++) {
+            JSONObject jSensor = jArray.getJSONObject(i);
+
+            Integer id = jSensor.getInt("id");
+            Double value = jSensor.getDouble("value");
+
+            if(id == 1) {
+                tempValue = value;
+            } else {
+                humiValue = value;
+            }
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -182,43 +438,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void findViews() {
+    private void displayWarningMessage(String msg) {
 
-        httpStatusCode = 0;
-        errorMsg = "";
-
-        // get all sensor info.
-        String httpHeader = getString(R.string.http_Header);
-        dbIP = httpHeader + dbIP + JSON_ADDRESS;
-        new GetAllSensorInfo().execute(dbIP);
-    }
-
-    private void sendRegistrationToServer(final String token){
-
-        httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
-
-            @Override
-            public void onTaskCompleted() {
-                Log.d(TAG,"http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
-                Log.d(TAG,"Updated DeviceToken");
-            }
-        });
-        httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
-    }
-
-    private void displayWarningMessage() {
-
-        String errorExport;
-        if (httpStatusCode == 0) {
-            errorExport = "HTTP Error : " + errorMsg;
-        } else {
-            errorExport = "HTTP Error, error code : " + Integer.toString(httpStatusCode);
-        }
-        Toast.makeText(MainActivity.this, errorExport, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Alert");
-        alertDialog.setMessage(errorExport);
+        alertDialog.setMessage(msg);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -292,6 +518,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("Main", "will parse JSON");
                     sensorList = getJSONData(sb.toString());
                     Log.e("Main", "parsed JSON");
+
+                    isAllSensorGot = true;
+                    Log.e("isAllSensorGot", "GOT~");
+
                     return sensorList;
                 } catch (JSONException je) {
                     je.printStackTrace();
@@ -307,7 +537,7 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.dismiss();
 
             if(sensorList == null) {
-                displayWarningMessage();
+                displayWarningMessage("no sensor info!");
             }
         }
 

@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/MPChartLib/MPChartLib.iml" filepath="$PROJECT_DIR$/MPChartLib/MPChartLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/eEyesAndroid.iml" filepath="$PROJECT_DIR$/eEyesAndroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gitAndroideEyes.iml" filepath="$PROJECT_DIR$/gitAndroideEyes.iml" />
     </modules>
   </component>
 </project>

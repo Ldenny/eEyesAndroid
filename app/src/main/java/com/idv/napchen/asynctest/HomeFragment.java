@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 
@@ -29,6 +30,11 @@ public class HomeFragment extends Fragment {
 //                        .show();
 //            }
 //        });
+
+        TextView tvTemp = (TextView) coordinatorLayout.findViewById(R.id.tvTempValue);
+
+        tvTemp.setText("12.3");
+
         return view;
     }
 }
