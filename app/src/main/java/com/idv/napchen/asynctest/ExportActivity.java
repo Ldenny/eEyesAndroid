@@ -200,11 +200,14 @@ public class ExportActivity extends AppCompatActivity {
                 if (bw != null){
                     bw.close();
                 }
+                Toast.makeText(ExportActivity.this, fileName + " saved", Toast.LENGTH_SHORT).show();
             }catch (IOException ie){
                 Log.e(TAG,ie.toString());
+            }catch (Exception e){
+                Log.e(TAG,e.toString());
             }
         }
-        Toast.makeText(ExportActivity.this, fileName + " saved", Toast.LENGTH_SHORT).show();
+
     }
 
 
