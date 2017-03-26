@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvSensorName"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="28sp"
+        android:textAlignment="center"
+        android:text="房間溫度" />
+
+    <TextView
+        android:id="@+id/tvHiAlarm"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="28sp"
+        android:text="31.2"
+        android:textAlignment="center"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/tvLoAlarm"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        android:textStyle="normal|bold"
+        android:text="25.4"
+        android:textAlignment="center" />
+
+</LinearLayout>

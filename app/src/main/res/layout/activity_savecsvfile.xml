@@ -25,25 +25,6 @@
         android:textAllCaps="false" />
 
     <TextView
-        android:text="Start Date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvFileName"
-        android:layout_alignLeft="@+id/tvFileName"
-        android:layout_marginTop="30dp"
-        android:id="@+id/tvStartDate" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvStartDate"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etStartDate"
-        android:layout_alignLeft="@+id/etEndDate"
-        android:layout_alignStart="@+id/etEndDate" />
-
-    <TextView
         android:text="End Date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,5 +80,29 @@
         android:layout_marginTop="28dp"
         android:layout_below="@+id/etEndDate"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/etStartDate"
+        android:layout_above="@+id/etEndDate"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/etFileName"
+        android:layout_alignStart="@+id/etFileName" />
+
+    <TextView
+        android:text="Start Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/tvStartDate"
+        android:layout_below="@+id/etFileName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/tvFileName"
+        android:layout_alignStart="@+id/tvFileName" />
 
 </RelativeLayout>
