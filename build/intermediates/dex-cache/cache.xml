@@ -12,30 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
-        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_c4e4227ef2fb970ccfbb4fd91524773fe5e33f33/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
         sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
         <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.3.0_73c853ea7e80ada60fb61cbaf86977df9a4cb836/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
-        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.3.0_09a67905cc412bcd8f08ea85b9004eccb08c6279/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -57,30 +39,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.2.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="5337354083e89ed67151859ab0b6b80935c60eaf">
-        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-9.2.1_bd18309a1e3e05816dc51696399677ffc26ce3c0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="9da8370a7acf21446455666f64a1579dacf4559b">
+        sha1="68cf39bf9b7879a4bb2d54d4690a5e9d0bcbfe56">
         <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a9403bd6874675a8768a5ee0a0a746d7ea183bc4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="debf30ce0a7560396b6235edef77e447006454c2">
-        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.3.0_c39e1b40abf1d429e5d28956273cc78e5e5cfaaa/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -99,6 +63,51 @@
         revision="23.0.2"
         sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
         <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.3.0_c98f69fbebf3051c5c5cf450d3d24b3fddd0b9d8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/denny/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.3.0_9d1c90d6a51777fb98560d2a5ab419cb0df8e44e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_c4e4227ef2fb970ccfbb4fd91524773fe5e33f33/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.3.0_09a67905cc412bcd8f08ea85b9004eccb08c6279/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5337354083e89ed67151859ab0b6b80935c60eaf">
+        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-9.2.1_bd18309a1e3e05816dc51696399677ffc26ce3c0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.3.0_c39e1b40abf1d429e5d28956273cc78e5e5cfaaa/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -151,17 +160,8 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="571faaefde95ae1c55e0ba751a3c4546e3d71898">
+        sha1="e32b4b9ff962527c20a3d12bc17322ce3ffa5d57">
         <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_048e6bd7f091715466476293df45634495ee074b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/denny/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
-        <dex dex="/Users/denny/Documents/gitAndroideEyes/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.3.0_9d1c90d6a51777fb98560d2a5ab419cb0df8e44e/classes.dex" />
     </item>
 
 </items>
