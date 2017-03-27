@@ -37,6 +37,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.R.attr.end;
+import static android.R.attr.type;
+
 /**
  * Created by napchen on 2017/3/15.
  */
@@ -67,7 +70,7 @@ public class ExportActivity extends AppCompatActivity {
 
     private int runTimes;
 
-    private String toCSV;
+    private String toCSV,startDate,endDate;
     int totalCount;
 
     private static String dateStr;
@@ -93,8 +96,8 @@ public class ExportActivity extends AppCompatActivity {
 
         showRightNow();
 
-        etStartDate.setText("2017-03-16 13:00:00");
-        etEndDate.setText("2017-03-16 13:05:00");
+        etStartDate.setText("2017-03-12 18:00:00");
+        etEndDate.setText("2017-03-12 18:05:00");
 
         // Get settings from settings xml
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -115,6 +118,16 @@ public class ExportActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                Log.e("button","1st check...");
+                startDate = etStartDate.getText().toString();
+                startDate = startDate.replace(" ","%20");
+                Log.e("button",startDate);
+                endDate = etEndDate.getText().toString();
+                endDate = endDate.replace(" ","%20");
+                Log.e("button",endDate);
+
                 getDataToCSV();
             }
         });
@@ -277,7 +290,7 @@ public class ExportActivity extends AppCompatActivity {
             });
 
             if(j == 0) {
-                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate=2017-03-12%2018:00:00&enddate=2017-03-12%2018:03:00&type=getRange");
+                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange");
                 Log.e("first","send...");
                 try {
                     //set time in mili
@@ -288,7 +301,7 @@ public class ExportActivity extends AppCompatActivity {
                 }
             }
             else {
-                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate=2017-03-12%2018:00:00&enddate=2017-03-12%2018:03:00&type=getRange");
+                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange");
 
                 Log.e("second","send...");
                 try {
