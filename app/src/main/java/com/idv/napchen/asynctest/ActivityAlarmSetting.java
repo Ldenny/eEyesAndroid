@@ -59,6 +59,8 @@ public class ActivityAlarmSetting extends AppCompatActivity {
     private String url4 = "23.4";
     private final String url5 = "}";
 
+    private String errMsg;
+
     boolean isUpdated, isFirst;
 
     @Override
@@ -116,6 +118,11 @@ public class ActivityAlarmSetting extends AppCompatActivity {
                 lp.alpha = 0.8f;
                 dialogWindow.setAttributes(lp);
 
+                etHiAlarm = (EditText) myDialog.findViewById(R.id.etHiAlarm);
+                etLoAlarm = (EditText) myDialog.findViewById(R.id.etLoAlarm);
+                etHiAlarm.setText(Double.toString(sensor.getHiAlarm()));
+                etLoAlarm.setText(Double.toString(sensor.getLoAlarm()));
+
                 btnOK = (Button) myDialog.findViewById(R.id.btnOK);
                 btnOK.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -135,12 +142,12 @@ public class ActivityAlarmSetting extends AppCompatActivity {
                                 Log.e("HTTP response",sensorValuesString);
 
                                 if(sensorValuesString.substring(0,4).equals("HTTP")) {
-                                    displayWarningMessage(sensorValuesString);
+                                    errMsg = sensorValuesString;
                                     return;
                                 }
 
                                 if(sensorValuesString.length() == 0) {
-                                    displayWarningMessage("Http no response!");
+                                    errMsg = "Http no response!";
                                     return;
                                 }
                                 isUpdated = true;
@@ -166,14 +173,13 @@ public class ActivityAlarmSetting extends AppCompatActivity {
                             sensorIndex = 1;
                         }
 
-                        allSensorsInfo.setHiLoAlarm(sensorIndex, hiAlarm, loAlarm);
-                        sensorList = allSensorsInfo.getAllSensorsInfo();
-
                         Log.e("update url",url);
                         httpGetSensorValue.execute(url);
 
                         int counter = 0;
                         isUpdated = false;
+
+                        boolean isTimeout = false;
 
                         while (isUpdated == false) {
                             try {
@@ -184,12 +190,22 @@ public class ActivityAlarmSetting extends AppCompatActivity {
                                 if(counter >= 10) {
                                     isUpdated = true;
                                     Log.e("http", "timeout...");
+                                    isTimeout = true;
                                     break;
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
+
+                        if(isTimeout == true) {
+                            displayWarningMessage(errMsg);
+                            myDialog.cancel();
+                            return;
+                        }
+
+                        allSensorsInfo.setHiLoAlarm(sensorIndex, hiAlarm, loAlarm);
+                        sensorList = allSensorsInfo.getAllSensorsInfo();
 
                         adapter.notifyDataSetChanged();
 

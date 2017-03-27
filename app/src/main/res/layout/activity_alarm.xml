@@ -3,6 +3,40 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text=""
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAlarmCheckingEnable"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <Button
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnClearAlarmStatus"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+             />
+
+        <Button
+            android:text=""
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAlarmCheckingDisable"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

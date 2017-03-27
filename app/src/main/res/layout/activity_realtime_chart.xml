@@ -15,7 +15,7 @@
         android:id="@+id/tvTemp"
         android:background="@color/colorAccent"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="22sp" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart2"
@@ -28,7 +28,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvHumi"
         android:background="@android:color/holo_blue_bright"
-        android:textSize="18sp"
-        android:textAlignment="center" />
+        android:textSize="22sp"
+        android:textAlignment="center"
+        android:autoText="false"
+        android:textStyle="normal|bold" />
 
 </LinearLayout>

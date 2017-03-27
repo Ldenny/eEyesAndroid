@@ -62,8 +62,8 @@ public class ChartSettingActivity extends AppCompatActivity {
 
         showRightNow();
 
-        etStartDate.setText("2017-03-16 13:00:00");
-        etEndDate.setText("2017-03-16 13:05:00");
+        etStartDate.setText("2017-03-27 11:25:00");
+        etEndDate.setText("2017-03-27 11:45:00");
 
         btnHistoryChart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,7 +240,7 @@ public class ChartSettingActivity extends AppCompatActivity {
         dateStr = (new StringBuilder().append(year).append("-")
                 //「month + 1」是因為一月的值是0而非1
                 .append(parseNum(month + 1)).append("-").append(parseNum(day)).append(" ")
-                .append(hour).append(":").append(parseNum(minute)).append(":00")).toString();
+                .append(parseNum(hour)).append(":").append(parseNum(minute)).append(":00")).toString();
     }
 
     // 若數字有十位數，直接顯示；若只有個位數則補0後再顯示。例如7會改成07後再顯示

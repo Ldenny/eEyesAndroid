@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.SeekBar;
@@ -60,6 +59,8 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
     private final String url21 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate=";
     private String url2;
 
+    private String errMsg;
+
     int totalCount;
 
     private SharedPreferences sharedPref;
@@ -84,6 +85,8 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
 
         getInputDateRange();
 
+        boolean isTimeout = false;
+
         for(int j = 0; j < 2; j++) {
             httpGetSensorValue = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
                 @Override
@@ -93,16 +96,14 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
                     Log.e("HTTP response",sensorValuesString);
 
                     if(sensorValuesString.substring(0,4).equals("HTTP")) {
-                        displayWarningMessage(sensorValuesString);
+                        errMsg = sensorValuesString;
                         return;
                     }
 
                     if(sensorValuesString.length() == 0) {
-                        displayWarningMessage("Http no response!");
+                        errMsg = "Http no response!";
                         return;
                     }
-
-                    isHttpResponse = true;
 
                     try {
                         Log.e("after got HTTP","start JSON parsing...");
@@ -113,47 +114,78 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
                     } catch (JSONException je) {
                         je.printStackTrace();
                     }
+
+                    isHttpResponse = true;
                 }
             });
 
+            isHttpResponse = false;
+            int counter = 0;
+
             if(j == 0) {
+                Log.e("url Start",url1);
+
                 httpGetSensorValue.execute(url1);
-                Log.e("first","send...");
-                try {
-                    //set time in mili
-                    Thread.sleep(300);
-                    Log.e("first","delay...");
-                }catch (Exception e){
-                    e.printStackTrace();
+
+                while (isHttpResponse == false) {
+                    try {
+                        Thread.sleep(300);
+                        Log.e("first", "delay...");
+                        counter++;
+                        if(counter >= 10) {
+                            Log.e("first", "timeout...");
+                            isTimeout = true;
+                            break;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(isTimeout == true) {
+                    displayWarningMessage(errMsg);
+                    return;
                 }
             }
             else {
+                Log.e("url end",url2);
                 httpGetSensorValue.execute(url2);
 
-                Log.e("second","send...");
-                try {
-                    //set time in mili
-                    Thread.sleep(300);
-                    Log.e("second","delay...");
-                }catch (Exception e){
-                    e.printStackTrace();
+                while (isHttpResponse == false) {
+                    try {
+                        Thread.sleep(300);
+                        Log.e("second", "delay...");
+                        counter++;
+                        if(counter >= 10) {
+                            Log.e("second", "timeout...");
+                            isTimeout = true;
+                            break;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(isTimeout == true) {
+                    displayWarningMessage(errMsg);
+                    return;
                 }
             }
         }
 
-        while(isHttpResponse == false) {
-            try {
-                //set time in mili
-                Thread.sleep(1000);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            Log.e("wait","1 sec...");
-        }
+//        while(isHttpResponse == false) {
+//            try {
+//                Thread.sleep(1000);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            Log.e("wait","1 sec...");
+//        }
+
+
 
         if(displaySensorValuesList.size() < 2) {
-
-            displayWarningMessage("no data or data error");
+            displayWarningMessage("Data Lose!");
             return;
         }
 
@@ -259,9 +291,6 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
 
         url1 = url10 + dbIP + url11 + url12 + url13 + url14 + url15;
         url2 = url10 + dbIP + url21 + url12 + url13 + url14 + url15;
-
-        Log.e("url Start",url1);
-        Log.e("url end",url2);
     }
 
     private DisplaySensorValues getJSONData(String str) throws JSONException {
@@ -294,11 +323,11 @@ public class HistoryLineChartActivity extends AppCompatActivity implements
         return displaySensorValues;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.line, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.line, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
