@@ -64,11 +64,15 @@ public class ExportActivity extends AppCompatActivity {
 
     private boolean isFirstGot, isSecondGot,isHttpResponse;
 
+    private String errMsg;
+
     private static EditText etStartDate, etEndDate;
 
     private static int year, month, day, hour, minute;
 
     private int runTimes;
+
+
 
     private String toCSV,startDate,endDate;
     int totalCount;
@@ -80,6 +84,9 @@ public class ExportActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savecsvfile);
+        isFirstGot = false;
+        isSecondGot = false;
+        isHttpResponse = false;
 
 
 
@@ -249,6 +256,8 @@ public class ExportActivity extends AppCompatActivity {
         isSecondGot = false;
         isHttpResponse = false;
 
+        boolean isTimeout = false;
+
 
         for(int j = 0; j < 2; j++) {
             runTimes = j;
@@ -260,12 +269,12 @@ public class ExportActivity extends AppCompatActivity {
                     Log.e("HTTP response",sensorValuesString);
 
                     if(sensorValuesString.substring(0,4).equals("HTTP")) {
-                        displayWarningMessage(sensorValuesString);
+                        errMsg = sensorValuesString;
                         return;
                     }
 
                     if(sensorValuesString.length() == 0) {
-                        displayWarningMessage("Http no response!");
+                        errMsg = "Http no response!";
                         return;
                     }
 
@@ -286,35 +295,79 @@ public class ExportActivity extends AppCompatActivity {
                     } catch (JSONException je) {
                         je.printStackTrace();
                     }
+
+                    isHttpResponse = true;
                 }
             });
+            /////
+            isHttpResponse = false;
+            int counter = 0;
 
             if(j == 0) {
-                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange");
-                Log.e("first","send...");
-                try {
-                    //set time in mili
-                    Thread.sleep(300);
-                    Log.e("first","delay...");
-                }catch (Exception e){
-                    e.printStackTrace();
+                String url1 ="http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange";
+
+                Log.e("url Start",url1);
+
+                httpGetSensorValue.execute(url1);
+
+                while (isHttpResponse == false) {
+                    try {
+                        Thread.sleep(300);
+                        Log.e("first", "delay...");
+                        counter++;
+                        if(counter >= 10) {
+                            Log.e("first", "timeout...");
+                            isTimeout = true;
+                            break;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+
+                    if (isTimeout == true) {
+                        displayWarningMessage(errMsg);
+                        return;
+                    }
+
             }
             else {
-                httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange");
+                String url2 = "http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange";
+                Log.e("url end",url2);
+                httpGetSensorValue.execute(url2);
 
-                Log.e("second","send...");
-                try {
-                    //set time in mili
-                    Thread.sleep(300);
-                    Log.e("second","delay...");
-                    String fileName = etFileName.getText().toString();
-                    File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-                    saveFile(dir, fileName + ".csv");
-                }catch (Exception e){
-                    e.printStackTrace();
+                while (isHttpResponse == false) {
+                    try {
+                        Thread.sleep(300);
+                        Log.e("second", "delay...");
+                        counter++;
+                        if(counter >= 10) {
+                            Log.e("second", "timeout...");
+                            isTimeout = true;
+                            break;
+                        }else{
+                            String fileName = etFileName.getText().toString();
+                            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                            saveFile(dir, fileName + ".csv");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if(isTimeout == true) {
+                    displayWarningMessage(errMsg);
+                    return;
                 }
             }
+
+
+
+
+
+            ////
+
+
         }
 
         while(isHttpResponse == false) {

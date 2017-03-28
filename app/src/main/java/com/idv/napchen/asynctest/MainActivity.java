@@ -51,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Handler handler;
 
+    HttpGetSensorValue setHttpAlarmCheckinfEnable;
+
     private static final String JSON_ADDRESS = "/dbinfoGet.php?username=root&password=root&database=eEyes&appUserName=user&appPassword=password&type=getSensorByUser";
+    private static final String START_ALARM_CHECKING_ADDRESS = "/SendAllAlarm/checkAlarmGet.php?username=root&password=root&database=eEyes&appUserName=user&type=checkAlarm&sec=1";
 
     private List<Sensor> sensorList;
 
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     private HttpGetSensorValue httpGetSensorValue;
 
-    private boolean isFirst, isSecond, isHandlerEnable, isAllSensorGot;
+    private boolean isFirst, isSecond, isHandlerEnable, isAllSensorGot, isHttpResponse, isTokenSent;
 
     private String url1 = "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=RealID10001&field=RealValue&sensorID=1&datefield=Date&startdate=2017-03-20%2009:37:01&enddate=2017-02-28%2015:30:00&type=getNewest";
 
@@ -207,9 +210,21 @@ public class MainActivity extends AppCompatActivity {
             public void onTaskCompleted() {
                 Log.d(TAG,"http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
                 Log.d(TAG,"Updated DeviceToken");
+
+                isHttpResponse = true;
             }
         });
+
+        isHttpResponse = false;
         httpGetSensorValue.execute("http://" + dbIP + "/dbSensorValue_GET.php?password=root&insertdata=" + token + "&database=eEyes&table=deviceToken&username=root&field=DeviceToken&insertdate=2017-03-22%2014:17:26&type=updateDeviceToken&datefield=LastUpdateDateTime");
+
+        try {
+            //set time in mili
+            Thread.sleep(300);
+            Log.e("HttpToken", "delay...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void findViews() {
@@ -217,15 +232,64 @@ public class MainActivity extends AppCompatActivity {
         httpStatusCode = 0;
         errorMsg = "";
 
+        // set check alarm
+        setHttpAlarmCheckinfEnable = new HttpGetSensorValue(new HttpGetSensorValue.OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted() {
+                String sensorValuesString = setHttpAlarmCheckinfEnable.getResultStringData();
+
+                Log.e("HTTP response",sensorValuesString);
+
+                if(sensorValuesString.substring(0,4).equals("HTTP")) {
+                    errorMsg = sensorValuesString;
+                    return;
+                }
+
+                if(sensorValuesString.length() == 0) {
+                    errorMsg = "Http no response!";
+                    return;
+                }
+
+                isHttpResponse = true;
+            }
+
+        });
+
+        isHttpResponse = false;
+        String url = "http://" + dbIP + START_ALARM_CHECKING_ADDRESS;
+        Log.e("setAlarmCheckinfEnable",url);
+        setHttpAlarmCheckinfEnable.execute(url);
+
+        int counter = 0;
+        while (isHttpResponse == false) {
+            try {
+                //set time in mili
+                Thread.sleep(300);
+                Log.e("HttpToken", "delay...");
+                counter++;
+                if(counter >= 10) {
+                    Log.e("HttpToken", "timeout...");
+                    break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(isHttpResponse == false) {
+            displayWarningMessage(errorMsg);
+            return;
+        }
+
         isAllSensorGot = false;
 
         // get all sensor info.
         String httpHeader = getString(R.string.http_Header);
-        String url = httpHeader + dbIP + JSON_ADDRESS;
+        url = httpHeader + dbIP + JSON_ADDRESS;
 //        dbIP = httpHeader + dbIP + JSON_ADDRESS;
         new GetAllSensorInfo().execute(url);
 
-        int counter = 0;
+        counter = 0;
         while (isAllSensorGot == false) {
             try {
                 Thread.sleep(300);
@@ -279,8 +343,8 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(timerRun, 1000);
     }
 
-    private final Runnable timerRun = new Runnable()
-    {
+    private final Runnable timerRun = new Runnable() {
+
         public void run()
         {
 //            ++m_nTime; // 經過的秒數 + 1
@@ -304,12 +368,12 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("HTTP response",sensorValuesString);
 
                         if(sensorValuesString.substring(0,4).equals("HTTP")) {
-                            displayWarningMessage(sensorValuesString);
+                            errorMsg = sensorValuesString;
                             return;
                         }
 
                         if(sensorValuesString.length() == 0) {
-                            displayWarningMessage("Http no response!");
+                            errorMsg = "Http no response!";
                             return;
                         }
 
@@ -323,7 +387,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (JSONException je) {
                             je.printStackTrace();
                         }
-
                     }
                 });
 
@@ -337,10 +400,10 @@ public class MainActivity extends AppCompatActivity {
                     while (isFirst == true) {
                         try {
                             //set time in mili
-                            Thread.sleep(300);
+                            Thread.sleep(100);
                             Log.e("first", "delay...");
                             counter++;
-                            if(counter >= 10) {
+                            if(counter >= 30) {
                                 isFirst = false;
                                 isTimeOut = true;
                                 Log.e("first", "timeout...");
@@ -358,10 +421,10 @@ public class MainActivity extends AppCompatActivity {
                     while (isSecond == true) {
                         try {
                             //set time in mili
-                            Thread.sleep(300);
+                            Thread.sleep(100);
                             Log.e("second", "delay...");
                             counter++;
-                            if(counter >= 10) {
+                            if(counter >= 30) {
                                 isSecond = false;
                                 isTimeOut = true;
                                 Log.e("second", "timeout...");
@@ -385,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("sensor value", "timeout...");
                 timeoutCount++;
                 if(timeoutCount >= 5) {
-                    displayWarningMessage("No sensor data received!");
+                    displayWarningMessage(errorMsg);
                     handler.removeCallbacks(timerRun);
                 }
             }
@@ -430,6 +493,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayWarningMessage(String msg) {
+
+        Log.e("displayWarningMessage","msg");
 
         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
 

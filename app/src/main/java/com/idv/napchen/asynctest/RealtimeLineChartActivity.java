@@ -63,6 +63,8 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
     private String url23 = "&enddate=2017-02-28%2015:30:00&type=getNew";
     private String url2 = url21 + url22 + url23;
 
+    private String errMsg;
+
     private int onChartCount, onChartCount2, totalCount, timeoutCount;
 
     private SharedPreferences sharedPref;
@@ -250,16 +252,14 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                         Log.e("HTTP response",sensorValuesString);
 
                         if(sensorValuesString.substring(0,4).equals("HTTP")) {
-                            displayWarningMessage(sensorValuesString);
+                            errMsg = sensorValuesString;
                             return;
                         }
 
                         if(sensorValuesString.length() == 0) {
-                            displayWarningMessage("Http no response!");
+                            errMsg = "Http no response!";
                             return;
                         }
-
-                        isHttpResponse = true;
 
                         try {
                             getJSONData(sensorValuesString);
@@ -272,6 +272,7 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                             je.printStackTrace();
                         }
 
+                        isHttpResponse = true;
                     }
                 });
 
@@ -286,10 +287,10 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                     while (isFirst == true) {
                         try {
                             //set time in mili
-                            Thread.sleep(300);
+                            Thread.sleep(100);
                             Log.e("first", "delay...");
                             counter++;
-                            if(counter >= 10) {
+                            if(counter >= 30) {
                                 isFirst = false;
                                 isTimeOut = true;
                                 Log.e("first", "timeout...");
@@ -308,10 +309,10 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                     while (isSecond == true) {
                         try {
                             //set time in mili
-                            Thread.sleep(300);
+                            Thread.sleep(100);
                             Log.e("second", "delay...");
                             counter++;
-                            if(counter >= 10) {
+                            if(counter >= 30) {
                                 isSecond = false;
                                 isTimeOut = true;
                                 Log.e("second", "timeout...");
@@ -335,7 +336,7 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
                 Log.e("realchart", "timeout...");
                 timeoutCount++;
                 if(timeoutCount >= 5) {
-                    displayWarningMessage("No sensor data received!");
+                    displayWarningMessage(errMsg);
                     handler.removeCallbacks(timerRun);
                 }
             }
@@ -401,11 +402,11 @@ public class RealtimeLineChartActivity extends AppCompatActivity implements
         handler.removeCallbacks(timerRun);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.realtime, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.realtime, menu);
+//        return true;
+//    }
 
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
