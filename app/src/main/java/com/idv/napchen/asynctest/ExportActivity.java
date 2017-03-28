@@ -38,6 +38,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static android.R.attr.end;
+import static android.R.attr.password;
 import static android.R.attr.type;
 
 /**
@@ -72,22 +73,31 @@ public class ExportActivity extends AppCompatActivity {
 
     private int runTimes;
 
-
+    private SettingSingleton settingSingleton;
 
     private String toCSV,startDate,endDate;
     int totalCount;
 
     private static String dateStr;
 
+    private String mainIP,dbAccount,dbPW,dbName,dbUserName,dbUserPw;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savecsvfile);
+
+        // get settings from singleton
+        settingSingleton = settingSingleton.getInstance();
+        getAllSettings();
+
+
+
         isFirstGot = false;
         isSecondGot = false;
         isHttpResponse = false;
-
 
 
         findViews();
@@ -108,7 +118,7 @@ public class ExportActivity extends AppCompatActivity {
 
         // Get settings from settings xml
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String dbIp = sharedPref.getString("mainIPAddress", null);
+        dbIP = sharedPref.getString("mainIPAddress", null);
 
 
 
@@ -248,7 +258,7 @@ public class ExportActivity extends AppCompatActivity {
 
         // Setup IP from settings file
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        dbIP = sharedPref.getString("mainIPAddress", null);
+        //dbIP = sharedPref.getString("mainIPAddress", null);
 
         displaySensorValuesList = new ArrayList<>();
 
@@ -299,12 +309,13 @@ public class ExportActivity extends AppCompatActivity {
                     isHttpResponse = true;
                 }
             });
-            /////
+
             isHttpResponse = false;
             int counter = 0;
 
+
             if(j == 0) {
-                String url1 ="http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange";
+                String url1 ="http://" + mainIP + "/dbSensorValueJSONGet.php?username=" + dbAccount + "&password=" + dbPW + "&database=" + dbName + "&table=SensorRawData&field=RawValue&sensorID=1&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange";
 
                 Log.e("url Start",url1);
 
@@ -332,7 +343,7 @@ public class ExportActivity extends AppCompatActivity {
 
             }
             else {
-                String url2 = "http://" + dbIP + "/dbSensorValueJSONGet.php?username=root&password=root&database=eEyes&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange";
+                String url2 = "http://" + mainIP + "/dbSensorValueJSONGet.php?username=" + dbAccount + "&password=" + dbPW + "&database=" + dbName + "&table=SensorRawData&field=RawValue&sensorID=2&datefield=StartDate&startdate="+startDate+"&enddate="+endDate+"&type=getRange";
                 Log.e("url end",url2);
                 httpGetSensorValue.execute(url2);
 
@@ -588,4 +599,18 @@ public class ExportActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    private void getAllSettings(){
+
+        // Get settings
+        mainIP = settingSingleton.getMainIPAddress();
+        dbAccount = settingSingleton.getDbAccount();
+        dbPW = settingSingleton.getDbPW();
+        dbName = settingSingleton.getDbName();
+        dbUserName = settingSingleton.getDbUserName();
+        dbUserPw = settingSingleton.getDbUserPw();
+
+    }
+
 }

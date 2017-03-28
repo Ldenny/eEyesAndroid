@@ -13,12 +13,15 @@ import android.preference.PreferenceManager;
 public class InfoFragment extends PreferenceFragment implements
         SharedPreferences.OnSharedPreferenceChangeListener {
     private SharedPreferences sharedPref;
+    private SettingSingleton settingSingleton;
+
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingSingleton = settingSingleton.getInstance();
         addPreferencesFromResource(R.xml.personal_info);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
@@ -47,17 +50,34 @@ public class InfoFragment extends PreferenceFragment implements
         if(pref instanceof EditTextPreference) {
             EditTextPreference etPref = (EditTextPreference) pref;
             if (pref.getKey().equals("mainIPAddress")) {
+
                 etPref.setSummary(sharedPref.getString("mainIPAddress", getString(R.string.db_main_placeholder)));
+                settingSingleton.setMainIPAddress(sharedPref.getString("mainIPAddress",""));
+
             } else if (pref.getKey().equals("dbAccount")) {
+
                 etPref.setSummary(sharedPref.getString("dbAccount", getString(R.string.db_user_account_placeholder)));
+                settingSingleton.setDbAccount(sharedPref.getString("dbAccount",""));
+
             } else if (pref.getKey().equals("dbPW")) {
+
                 etPref.setSummary(sharedPref.getString("dbPW", getString(R.string.db_password_placeholder)));
+                settingSingleton.setDbPW(sharedPref.getString("dbPW",""));
+
             } else if (pref.getKey().equals("dbName")) {
+
                 etPref.setSummary(sharedPref.getString("dbName", getString(R.string.db_serverName_placeholder)));
+                settingSingleton.setDbName(sharedPref.getString("dbName",""));
+
             } else if (pref.getKey().equals("dbUserName")) {
+
                 etPref.setSummary(sharedPref.getString("dbUserName", getString(R.string.db_user_account_placeholder)));
+                settingSingleton.setDbUserName(sharedPref.getString("dbUserName",""));
+
             } else if (pref.getKey().equals("dbUserPw")) {
+
                 etPref.setSummary(sharedPref.getString("dbUserPw", getString(R.string.db_user_password_placeholder)));
+                settingSingleton.setDbUserPw(sharedPref.getString("dbUserPw",""));
             }
         }
     }

@@ -13,8 +13,7 @@
     <EditTextPreference
         android:key="dbPW"
         android:summary="@string/db_password_placeholder"
-        android:title="@string/db_password"
-        android:inputType="textPassword"/>
+        android:title="@string/db_password"/>
     <EditTextPreference
         android:key="dbName"
         android:summary="@string/db_serverName_placeholder"
@@ -26,8 +25,7 @@
     <EditTextPreference
         android:key="dbUserPw"
         android:summary="@string/db_user_password_placeholder"
-        android:title="@string/db_user_password"
-        android:inputType="textPassword"/>
+        android:title="@string/db_user_password"/>
     <SwitchPreference
         android:defaultValue="true"
         android:key="sendByAPNS"

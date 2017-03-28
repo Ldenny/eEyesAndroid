@@ -79,9 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
     private int timeoutCount;
 
+    private SettingSingleton settingSingleton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Init settingSingleton
+        settingSingleton = settingSingleton.getInstance();
+        setAllSettings();
 
         // setup FrameLayout and NavigationView
         setContentView(R.layout.activity_navi_view_main);
@@ -639,6 +645,31 @@ public class MainActivity extends AppCompatActivity {
 
             return list;
         }
+
+    }
+    private void setAllSettings(){
+
+        // Get settings from settings xml
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String mainIPAddress;
+        mainIPAddress = sharedPref.getString("mainIPAddress", null);
+        String dbAccount;
+        dbAccount = sharedPref.getString("dbAccount", null);
+        String dbPW;
+        dbPW = sharedPref.getString("dbPW", null);
+        String dbName;
+        dbName =  sharedPref.getString("dbName", null);
+        String dbUserName;
+        dbUserName = sharedPref.getString("dbUserName", null);
+        String dbUserPw;
+        dbUserPw = sharedPref.getString("dbUserPw", null);
+
+        settingSingleton.setMainIPAddress(mainIPAddress);
+        settingSingleton.setDbAccount(dbAccount);
+        settingSingleton.setDbPW(dbPW);
+        settingSingleton.setDbName(dbName);
+        settingSingleton.setDbUserName(dbUserName);
+        settingSingleton.setDbUserPw(dbUserPw);
 
     }
 }
